@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from './auth/auth.service';
-import { DataStorageService } from './shared/data-storage.service';
+import { LoggingService } from './logging.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,13 @@ import { DataStorageService } from './shared/data-storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private loggingService: LoggingService
+  ) {}
 
-  constructor(private dataStorage: DataStorageService, private authService: AuthService){}
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.authService.autoLogin();
+    this.loggingService.printLog('Hello from AppComponent ngOnInit');
   }
 }
